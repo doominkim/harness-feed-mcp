@@ -12,9 +12,19 @@
 - 별도 서버 배포 없이 tool 호출 시점에만 외부 소스에 HTTP 요청
 - 데이터 소스: GeekNews (`news.hada.io`)
 
-## Repository
+MCP client에서 다음과 같은 요청을 처리할 수 있습니다.
 
-- GitHub: [https://github.com/doominkim/harness-feed-mcp](https://github.com/doominkim/harness-feed-mcp)
+```text
+이번 주 AI 에이전트 관련 GeekNews 글 중에서 하네스 설계에 참고할 만한 것만 모아줘
+```
+
+```text
+최근 20개 GeekNews 기사 중에서 "kimi" 검색해줘
+```
+
+```text
+30554번 기사 상세 내용과 댓글을 확인해줘
+```
 
 ## 주요 기능
 
@@ -33,6 +43,10 @@
 - `search_feed` — 제목/요약 기준 검색 (in-memory 텍스트 매칭)
 - `get_weekly` — 주간 GeekNews Weekly 다이제스트 조회
 - `get_item` — 특정 아티클 상세 정보 (본문 + 댓글)
+
+## Repository
+
+- GitHub: [https://github.com/doominkim/harness-feed-mcp](https://github.com/doominkim/harness-feed-mcp)
 
 ## 사전 요구사항
 
@@ -90,39 +104,6 @@ npm run build
   }
 }
 ```
-
-## 사용 예시
-
-MCP client에서 자연어로 요청하면 됩니다.
-
-```text
-이번 주 AI 에이전트 관련 GeekNews 글 중에서 하네스 설계에 참고할 만한 것만 모아줘
-```
-
-```text
-최근 20개 GeekNews 기사 중에서 "kimi" 검색해줘
-```
-
-```text
-30554번 기사 상세 내용과 댓글을 확인해줘
-```
-
-## 문제 해결
-
-| 증상 | 원인 | 해결 방법 |
-| --- | --- | --- |
-| `Connection closed` | MCP server가 시작 직후 종료됨 | `node dist/index.js`를 직접 실행해 stderr 확인 |
-| 데이터 조회 실패 | GeekNews 사이트 접근 불가 | 네트워크 연결 확인 |
-| `npx` 실행 시 매번 설치 | 의존성 설치 시간 | `-y` 플래그로 자동 승인 |
-
-직접 실행해서 확인:
-
-```bash
-cd /path/to/harness-feed-mcp
-node dist/index.js
-```
-
-정상 실행 시 MCP stdio server가 client message를 기다리므로 출력 없이 대기할 수 있습니다.
 
 ## License
 
