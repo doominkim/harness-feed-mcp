@@ -12,6 +12,8 @@
 - 별도 서버 배포 없이 tool 호출 시점에만 외부 소스에 HTTP 요청
 - 데이터 소스: GeekNews (`news.hada.io`)
 
+## 사용 예시
+
 MCP client에서 다음과 같은 요청을 처리할 수 있습니다.
 
 ```text
@@ -35,6 +37,16 @@ MCP client에서 다음과 같은 요청을 처리할 수 있습니다.
 | Search | 제목/요약 기준 in-memory 텍스트 검색 |
 | Weekly | 주간 GeekNews 다이제스트 조회 |
 | Detail | 아티클 상세 (본문 + 댓글) 조회 |
+
+## 소스
+
+| 소스 | 상태 | 설명 |
+| --- | --- | --- |
+| [GeekNews](https://news.hada.io) | ✅ 제공 중 | 한국 개발/기술/스타트업 뉴스 큐레이션 |
+| [arXiv](https://arxiv.org) | 📋 예정 | 논문 프리프린트 (cs.AI, cs.CL 등) |
+| [Hacker News](https://news.ycombinator.com) | 📋 예정 | Y Combinator 기술 뉴스 커뮤니티 |
+| [Papers with Code](https://paperswithcode.com) | 📋 예정 | 논문 + 구현 코드 연동 플랫폼 |
+
 
 ## 제공 도구
 
