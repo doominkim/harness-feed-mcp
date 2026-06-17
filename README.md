@@ -10,7 +10,7 @@
 
 - `npx -y @kimduumin/harness-feed-mcp@latest`로 stdio 실행
 - 별도 서버 배포 없이 tool 호출 시점에만 외부 소스에 HTTP 요청
-- 초기 데이터 소스: GeekNews (`news.hada.io`)
+- 데이터 소스: GeekNews (`news.hada.io`)
 
 ## Repository
 
@@ -59,12 +59,6 @@ npm install
 npm run build
 ```
 
-## 환경 변수
-
-| 변수 | 필수 | 설명 | 기본값 |
-| --- | --- | --- | --- |
-| `HARNESS_FEED_CACHE_TTL_SECONDS` | 아니오 | in-memory 캐시 TTL (초). 0이면 캐시 비활성 | `0` |
-
 ## MCP client 설정
 
 ### OpenCode
@@ -91,10 +85,7 @@ npm run build
   "mcpServers": {
     "harness-feed": {
       "command": "npx",
-      "args": ["-y", "@kimduumin/harness-feed-mcp@latest"],
-      "env": {
-        "HARNESS_FEED_CACHE_TTL_SECONDS": "300"
-      }
+      "args": ["-y", "@kimduumin/harness-feed-mcp@latest"]
     }
   }
 }
@@ -122,7 +113,6 @@ MCP client에서 자연어로 요청하면 됩니다.
 | --- | --- | --- |
 | `Connection closed` | MCP server가 시작 직후 종료됨 | `node dist/index.js`를 직접 실행해 stderr 확인 |
 | 데이터 조회 실패 | GeekNews 사이트 접근 불가 | 네트워크 연결 확인 |
-| 느린 응답 | 매 요청마다 GeekNews fetch | `HARNESS_FEED_CACHE_TTL_SECONDS=300` 설정 |
 | `npx` 실행 시 매번 설치 | 의존성 설치 시간 | `-y` 플래그로 자동 승인 |
 
 직접 실행해서 확인:
