@@ -1,6 +1,6 @@
 {
   "name": "@kimduumin/harness-feed-mcp",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "MCP server providing structured tech feeds for harness subagent design",
   "type": "module",
   "main": "./dist/index.js",
