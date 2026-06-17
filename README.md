@@ -46,6 +46,10 @@ MCP client에서 다음과 같은 요청을 처리할 수 있습니다.
 | [arXiv](https://arxiv.org) | 📋 예정 | 논문 프리프린트 (cs.AI, cs.CL 등) |
 | [Hacker News](https://news.ycombinator.com) | 📋 예정 | Y Combinator 기술 뉴스 커뮤니티 |
 | [Papers with Code](https://paperswithcode.com) | 📋 예정 | 논문 + 구현 코드 연동 플랫폼 |
+| [Lobste.rs](https://lobste.rs) | 📋 예정 | 초대제 기술 커뮤니티, 높은 품질의 기술 토론 |
+| [Dev.to](https://dev.to) | 📋 예정 | 개발자 커뮤니티, 태그 기반 큐레이션 |
+| [Product Hunt](https://www.producthunt.com) | 📋 예정 | 신제품·스타트업 런칭, 최신 도구 트렌드 |
+| [TLDR](https://tldr.tech) | 📋 예정 | 일일 기술 뉴스 요약, 글로벌 인기 큐레이션 |
 
 
 ## 제공 도구
