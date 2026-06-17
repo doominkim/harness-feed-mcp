@@ -1,5 +1,5 @@
 {
-  "name": "harness-feed-mcp",
+  "name": "@kimduumin/harness-feed-mcp",
   "version": "0.1.0",
   "description": "MCP server providing structured tech feeds for harness subagent design",
   "type": "module",
@@ -8,10 +8,13 @@
     "harness-feed-mcp": "./dist/index.js"
   },
   "files": [
-    "dist"
+    "dist",
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
     "build": "tsc",
+    "prepack": "npm run build",
     "dev": "tsx src/index.ts",
     "start": "node dist/index.js"
   },
