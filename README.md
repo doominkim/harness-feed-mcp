@@ -10,7 +10,7 @@
 
 - `npx -y @kimduumin/harness-feed-mcp@latest`로 stdio 실행
 - 별도 서버 배포 없이 tool 호출 시점에만 외부 소스에 HTTP 요청
-- GeekNews, Hacker News, arXiv, Lobste.rs, Dev.to, TLDR, Papers with Code 등 7개 소스 지원
+- GeekNews, Hacker News, arXiv, Lobste.rs, Dev.to, TLDR, Papers with Code, Reddit 등 8개 소스 지원
 
 ## 사용 예시
 
@@ -32,6 +32,10 @@ arXiv에서 "RLHF" 관련 최신 논문 찾아줘
 Lobste.rs에서 가장 핫한 글 5개 알려줘
 ```
 
+```text
+r/LocalLLaMA 최신 글 보여줘
+```
+
 ## 소스
 
 | 소스 | 상태 | 설명 |
@@ -43,6 +47,7 @@ Lobste.rs에서 가장 핫한 글 5개 알려줘
 | [Dev.to](https://dev.to) | ✅ | 개발자 커뮤니티, 태그 기반 큐레이션 |
 | [TLDR](https://tldr.tech) | ✅ | 일일 기술 뉴스 요약 |
 | [Papers with Code](https://paperswithcode.com) | ✅ | 논문 + 구현 코드 연동 |
+| [Reddit](https://www.reddit.com) | ✅ | 서브레딧 기반 큐레이션 (RSS, 점수·댓글수 미제공) |
 
 ## 제공 도구
 
@@ -55,6 +60,7 @@ Lobste.rs에서 가장 핫한 글 5개 알려줘
 | Dev.to | `get_devto_recent`, `search_devto`, `get_devto_item` |
 | TLDR | `get_tldr_recent`, `search_tldr`, `get_tldr_item` |
 | Papers with Code | `get_paperswithcode_recent`, `search_paperswithcode`, `get_paperswithcode_item` |
+| Reddit | `get_reddit`, `get_reddit_recent`, `search_reddit`, `get_reddit_item` |
 
 ## Repository
 
@@ -63,6 +69,7 @@ Lobste.rs에서 가장 핫한 글 5개 알려줘
 ## 사전 요구사항
 
 - Node.js 18 이상
+- `curl` (Reddit 소스 전용) — Reddit이 Node의 fetch 요청을 봇으로 차단하므로 시스템 `curl`로 우회합니다. macOS·대부분의 Linux·Windows 10+ 에 기본 탑재되어 있습니다. Reddit 도구를 쓰지 않으면 불필요합니다.
 
 ## 설치
 

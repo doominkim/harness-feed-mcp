@@ -7,6 +7,7 @@ import { LobstersSource } from './sources/lobsters.js';
 import { DevtoSource } from './sources/devto.js';
 import { TldrSource } from './sources/tldr.js';
 import { PapersWithCodeSource } from './sources/paperswithcode.js';
+import { RedditSource } from './sources/reddit.js';
 import type { FeedType } from './types.js';
 
 export function createServer(): McpServer {
@@ -17,6 +18,7 @@ export function createServer(): McpServer {
   const devto = new DevtoSource();
   const tldr = new TldrSource();
   const paperswithcode = new PapersWithCodeSource();
+  const reddit = new RedditSource();
   const server = new McpServer({
     name: 'harness-feed-mcp',
     version: '0.1.0',
@@ -328,6 +330,58 @@ export function createServer(): McpServer {
   }, async (args: Record<string, unknown>) => {
     const id = args.id as string;
     const detail = await paperswithcode.getItem(id);
+    return { content: [{ type: 'text' as const, text: JSON.stringify(detail, null, 2) }] };
+  });
+
+  // ===== Reddit =====
+
+  server.registerTool('get_reddit', {
+    description: '특정 서브레딧의 아티클을 조회합니다 (정렬 지정 가능).',
+    inputSchema: z.object({
+      subreddit: z.string().describe('서브레딧 이름 (r/ 접두사 없이, 예: "programming")'),
+      sort: z.enum(['hot', 'new', 'top', 'rising']).default('hot').describe('정렬 방식'),
+      limit: z.number().int().min(1).max(100).default(20).describe('반환할 최대 개수'),
+    }),
+  }, async (args: Record<string, unknown>) => {
+    const subreddit = args.subreddit as string;
+    const sort = args.sort as string;
+    const limit = args.limit as number;
+    const items = await reddit.getSubreddit(subreddit, sort, limit);
+    return { content: [{ type: 'text' as const, text: JSON.stringify(items, null, 2) }] };
+  });
+
+  server.registerTool('get_reddit_recent', {
+    description: '최신 Reddit 아티클을 조회합니다 (AI + 프로그래밍 기본 서브레딧 통합, 중복 제거).',
+    inputSchema: z.object({
+      limit: z.number().int().min(1).max(100).default(20).describe('반환할 최대 개수'),
+    }),
+  }, async (args: Record<string, unknown>) => {
+    const limit = args.limit as number;
+    const items = await reddit.getRecent(limit);
+    return { content: [{ type: 'text' as const, text: JSON.stringify(items, null, 2) }] };
+  });
+
+  server.registerTool('search_reddit', {
+    description: 'Reddit 아티클을 제목/요약 기준으로 검색합니다 (in-memory 텍스트 매칭).',
+    inputSchema: z.object({
+      query: z.string().describe('검색어'),
+      limit: z.number().int().min(1).max(100).default(20).describe('반환할 최대 개수'),
+    }),
+  }, async (args: Record<string, unknown>) => {
+    const query = args.query as string;
+    const limit = args.limit as number;
+    const items = await reddit.search(query, limit);
+    return { content: [{ type: 'text' as const, text: JSON.stringify(items, null, 2) }] };
+  });
+
+  server.registerTool('get_reddit_item', {
+    description: '특정 Reddit 아티클의 상세 정보(본문 + 상위 댓글)를 조회합니다.',
+    inputSchema: z.object({
+      id: z.string().describe('Reddit post id (base36, 예: "1abc23")'),
+    }),
+  }, async (args: Record<string, unknown>) => {
+    const id = args.id as string;
+    const detail = await reddit.getItem(id);
     return { content: [{ type: 'text' as const, text: JSON.stringify(detail, null, 2) }] };
   });
 
